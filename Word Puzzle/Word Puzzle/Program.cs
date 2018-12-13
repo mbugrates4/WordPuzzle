@@ -22,10 +22,10 @@ namespace Word_Puzzle
             /////VARIABLES START
             bool application = true;
             int menu_in = 0;
-            
-            ////VARIABLES END
-            
 
+            ////VARIABLES END
+
+            
 
 
             /////PREPARE VARIABLES START
@@ -33,50 +33,81 @@ namespace Word_Puzzle
             /////PREPARE VARIABLES END
 
 
-            
+
             //////APPLICATION LOOP START
             while (application)
             {
                 bool gameFinished = true;
 
+
+
+
                 /////START SCREEN START
                 ///
-
                 Console.Clear();
+                Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
+                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("_          _  __   _        __    __    _  _   ___                           "); Console.ResetColor(); Console.WriteLine(" |");
+                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\        / / |  _| | |      / __|  / _ \\  |  \\/  | |  __|                          "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                       "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\  /\\  / /  | |_ |  | |     | |      | |  | | | \\  / | | |_                             "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                        "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\//  \\/ /  |  _|   | |     | |      | |  | | | |\\/| | |  _|                            "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                         "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\  /\\  /    | |__  | |__ | |__  | |_| | | |  | | | |_                           "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                          "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\//  \\//   |__| |__| \\__|  \\_/  ||  || |__|                          "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.WriteLine("|                                                                                                                    | ");
                 
-                Console.WriteLine("|---------------------------------------------------------------------------------------------------------------------|");
-                Console.WriteLine("|                                                  Welcome                                                            |");
-                Console.WriteLine("|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|");
-                Console.WriteLine("|                |                                   Menu                                            |                |");
-                Console.WriteLine("|                |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
-                Console.WriteLine("|                | 1- If you want to continue and see your results please press 1.                   |                |");
-                Console.WriteLine("|                | 2- If you want to see tutorials and informations about program please press 2.    |                |");
-                Console.WriteLine("|                | 3- If you want to exit please press 3.                                            |                |");
-                Console.WriteLine("|                |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
-                Console.WriteLine("|---------------------------------------------------------------------------------------------------------------------|");
                 
-                menu_in = Convert.ToInt16(Console.ReadLine());//get input
-
-
-
+                //Console.WriteLine("|  Please upload your puzzle and words as two seperate .txt file and open program again.If you uploaded files ignore this message and continue.|");
+                Console.WriteLine("| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|");
+                Console.Write("|               |                                   "); Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("Menu"); Console.ResetColor(); Console.WriteLine("                                            |                |");
+                Console.WriteLine("|               |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
+                Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("1 - If you want to continue and see your solutions please press 1."); Console.ResetColor(); Console.WriteLine("                |                |");
+                Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("2 - If you want to see tutorials and informations about program please press 2."); Console.ResetColor(); Console.WriteLine("   |                |");
+                Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("3 - If you want to exit please press 3."); Console.ResetColor(); Console.WriteLine("                                           |                |");
+                Console.WriteLine("|               |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
+                Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
+                
+                
+                //if 
+                menu_in = Convert.ToInt16(Console.ReadLine());
+                
                 //////START SCREEN END
-                ///
 
 
+                
+                
+                
+                
+                
+                
                 //////TUTORIAL START
 
                 if (menu_in == 2)
                 {
                     Console.Clear();
-                    Console.WriteLine("Pragram will solve ");
-                    Console.WriteLine("Program will solve your puzzle step by step and give you results both in program and as .txt file.Please enter and wait. ");
+
+                    Console.WriteLine("| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |");
+                    Console.Write("|  |                                                "); Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("Tutorial"); Console.ResetColor(); Console.WriteLine("                                                       |  |");
+                    Console.WriteLine("|  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|  |");
+                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Program needs compatible puzzle matrix and a word list which we describe as dictionary both in .txt files."); Console.ResetColor(); Console.WriteLine("  |  |");
+                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Program will draw a puzzle with given matrix and solve your puzzle step by step while filling blanks with "); Console.ResetColor(); Console.WriteLine("  |  |");
+                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("  words in the dictionary.                                                                                  "); Console.ResetColor(); Console.WriteLine("  |  |");
+                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("                                                                                                            "); Console.ResetColor(); Console.WriteLine("  |  |");
+                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Your solution will be given to you both in the end of program and as .txt file in the program folder.     "); Console.ResetColor(); Console.WriteLine("  |  |");
+                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Please enter and wait.                                                                                    "); Console.ResetColor(); Console.WriteLine("  |  |");
+                    Console.WriteLine("|  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|  |");
+                    Console.WriteLine("|---------------------------------------------------------------------------------------------------------------------|");
+                    //other alternative word for compatible -congruent- 
+
                     Console.ReadLine();
-                    continue;
                 }
 
                 /////TUTORIAL END
 
 
+                
+                
+                
+                
+                
                 ///////GAME LOOP START
                 if (menu_in == 1)
                 {
@@ -147,17 +178,27 @@ namespace Word_Puzzle
                 ////////GAME LOOP END
 
 
+                
+            
+            
+            
                 //////CREATE SOLUTION ARRAY START
 
                 //TO TEXT
 
                 ////////CREATE SOLUTION ARRAY END
-
-
-
+                
+                
+                
+                
+                
+                
                 //////END SCREEN START
 
                 //////END SCREEN END
+
+
+
 
 
             }
