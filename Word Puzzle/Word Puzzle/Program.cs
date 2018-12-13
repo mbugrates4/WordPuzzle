@@ -15,6 +15,30 @@ namespace Word_Puzzle
             string path = Directory.GetCurrentDirectory();
             string pathDictionary = path + "\\dictionary";
             string pathPuzzle = path + "\\puzzle";
+            
+            string[] words = System.IO.File.ReadAllLines(@pathDictionary);
+            string[] puzzleText = System.IO.File.ReadAllLines(@pathPuzzle);
+
+            
+
+            for (int i = 0; i < words.Length - 1; i++)
+            {
+                if (words[i].Length != words[i + 1].Length)
+                    Array.Sort(words, (x, y) => x.Length.CompareTo(y.Length));
+
+                else if (string.Compare(words[i], words[i + 1]) > 0) //if first number is greater then second then swap
+                {
+                    //swap
+                    string temp = words[i];
+                    words[i] = words[i + 1];
+                    words[i + 1] = temp;
+                }
+            }
+
+
+            
+            
+
             /////INPUT FILES END
             ///
 
@@ -22,7 +46,6 @@ namespace Word_Puzzle
             /////VARIABLES START
             bool application = true;
             int menu_in = 0;
-
             ////VARIABLES END
 
             
