@@ -84,15 +84,15 @@ namespace Word_Puzzle
                 ///
                 Console.Clear();
                 Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
-                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("_          _  __   _        __    __    _  _   ___                           "); Console.ResetColor(); Console.WriteLine(" |");
-                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\        / / |  _| | |      / __|  / _ \\  |  \\/  | |  __|                          "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                       "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\  /\\  / /  | |_ |  | |     | |      | |  | | | \\  / | | |_                             "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                        "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\//  \\/ /  |  _|   | |     | |      | |  | | | |\\/| | |  _|                            "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                         "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\  /\\  /    | |__  | |__ | |__  | |_| | | |  | | | |_                           "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                          "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\//  \\//   |__| |__| \\__|  \\_/  ||  || |__|                          "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("__          __  ______   _        _____    ____    __  __   ______                           "); Console.ResetColor(); Console.WriteLine(" |");
+                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\        / / |  ____| | |      / ____|  / __ \\  |  \\/  | |  ____|                          "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                       "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\  /\\  / /  | |__ |  | |     | |      | |  | | | \\  / | | |__                             "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                        "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\//  \\/ /  |  __|   | |     | |      | |  | | | |\\/| | |  __|                            "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                         "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\  /\\  /    | |____  | |____ | |____  | |__| | | |  | | | |____                           "); Console.ResetColor(); Console.WriteLine(" | ");
+                Console.Write("|                          "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\//  \\//   |______| |______| \\_____|  \\____/  |_|  |_| |______|                          "); Console.ResetColor(); Console.WriteLine(" | ");
                 Console.WriteLine("|                                                                                                                    | ");
-                
-                
+
+
                 //Console.WriteLine("|  Please upload your puzzle and words as two seperate .txt file and open program again.If you uploaded files ignore this message and continue.|");
                 Console.WriteLine("| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|");
                 Console.Write("|               |                                   "); Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("Menu"); Console.ResetColor(); Console.WriteLine("                                            |                |");
