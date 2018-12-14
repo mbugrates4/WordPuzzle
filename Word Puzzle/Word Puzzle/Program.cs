@@ -11,17 +11,17 @@ namespace Word_Puzzle
     {
         public static IList<string> SortStringLength(IList<string> stringList)
         {
-            string[] strs = stringList.ToArray<string>();
-            Array.Sort(strs, new Comparison<string>(delegate (string str1, string str2)
+            string[] wordDict = stringList.ToArray<string>();
+            Array.Sort(wordDict, new Comparison<string>(delegate (string word1, string word2)
             {
-                if (str1.Length < str2.Length)
+                if (word1.Length < word2.Length)
                     return -1; //shorter string before longer string
-                else if (str1.Length > str2.Length)
+                else if (word1.Length > word2.Length)
                     return 1; //longer string after shorter string
                 else
-                    return str1.CompareTo(str2); //alphabetical order
+                    return word1.CompareTo(word2); //alphabetical order
             }));
-            return strs;
+            return wordDict;
         }
 
 
@@ -78,6 +78,7 @@ namespace Word_Puzzle
                 bool gameFinished = false;
 
 
+                
 
 
                 /////START SCREEN START
