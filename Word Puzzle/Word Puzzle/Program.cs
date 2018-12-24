@@ -26,6 +26,113 @@ namespace Word_Puzzle
             return wordDict;
         }
 
+        public static string[] puzzleText;
+
+
+        static void PrintPuzzle(int wordCounterPrec, string[] puzzleTextPrec, string[] wordsPrec)
+        {
+            //to write word counter
+            Console.Clear();
+            Console.WriteLine("WORD = " + wordCounterPrec);
+
+
+
+
+
+
+            //messages
+            Console.SetCursorPosition(0, puzzleTextPrec.GetLength(0) + 2);
+            if (wordCounterPrec == 0)
+            {
+                Console.WriteLine("Press \"ENTER\" to start.");
+            }
+            else
+            {
+                //write the message when word counter is not 0
+            }
+
+
+
+
+
+
+
+
+            //Printing left side of screen puzzle table 
+            for (int i = 0; i < puzzleTextPrec[0].Length; i++)
+            {
+                Console.SetCursorPosition(2 + i, 1);
+                Console.Write(i % 10);
+            }
+            for (int i = 0; i < puzzleTextPrec.Length; i++)
+            {
+
+                Console.SetCursorPosition(1, 2 + i);
+                Console.Write(i % 10);
+                Console.Write(puzzleTextPrec[i]);
+            }
+
+            //Printing right side of screen
+
+            // row number
+            int row = wordsPrec.Length / puzzleTextPrec.Length + 1;
+            //table
+            Console.SetCursorPosition(puzzleTextPrec[0].Length + 6, 1);
+            Console.Write("+-WORD-LIST");
+
+            for (int i = 0; i < row; i++)
+            {
+                Console.Write("---------");
+
+            }
+            Console.Write("-+");
+
+
+
+            for (int i = 0; i < puzzleTextPrec.Length - 1; i++)
+            {
+                Console.SetCursorPosition(puzzleTextPrec[0].Length + 6, i + 2);
+                Console.Write("|");
+
+                Console.SetCursorPosition(puzzleTextPrec[0].Length + 18 + (row * 9
+
+                    ), i + 2);
+                Console.Write("|");
+
+            }
+
+            Console.SetCursorPosition(puzzleTextPrec[0].Length + 6, puzzleTextPrec.Length + 1);
+            Console.Write("+-");
+            for (int i = 0; i < row + 1; i++)
+            {
+                Console.Write("---------");
+
+            }
+            Console.Write("-+");
+
+            //words
+            for (int r = 0; r < row; r++)
+            {
+                int i = 0;
+                int xList = 0, yList = 0;
+                xList = puzzleTextPrec[0].Length + 7 + (r * 14);
+
+                for (i = (r * (puzzleTextPrec.Length - 1)); i < wordsPrec.Length; i++)
+                {
+                    if (i < (r + 1) * puzzleTextPrec.Length - 1)
+                    {
+                        yList = (i % (puzzleTextPrec.Length - 1)) + 2;
+                        Console.SetCursorPosition(xList, yList);
+                        Console.Write("[ ]" + wordsPrec[i]);
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
+            }
+        }
 
 
 
@@ -37,7 +144,7 @@ namespace Word_Puzzle
             string path = Directory.GetCurrentDirectory();
             string pathDictionary = path + "\\dictionary.txt";
             string pathPuzzle = path + "\\puzzle.txt";
-            
+
             //to import .txt files
             string[] words = System.IO.File.ReadAllLines(@pathDictionary);
             string[] puzzleText = System.IO.File.ReadAllLines(@pathPuzzle);
@@ -59,6 +166,7 @@ namespace Word_Puzzle
             int[] boxCoorY = new int[words.GetLength(0)];
             string[] box = new string[words.GetLength(0)];
             bool[] specExist = new bool[words.GetLength(0)];
+            bool[] boxCompleted = new bool[words.GetLength(0)];
             ///////////////////////////////////////////////////////////////////////////////////////VARIABLES END
 
 
@@ -78,11 +186,11 @@ namespace Word_Puzzle
                 box[i] = "";
             }
 
-            
-            
-            
-            
-            
+
+
+
+
+
             ////////////TO GET BOXES STRING
             int counterBox = 0;
 
@@ -151,9 +259,15 @@ namespace Word_Puzzle
                     }
                 }
             }
-            
-            
-            
+
+            //to make false all of boxCompleted variables
+            for (int i = 0; i < boxCompleted.GetLength(0); i++)
+            {
+                boxCompleted[i] = false;
+            }
+
+
+
 
 
 
@@ -161,7 +275,7 @@ namespace Word_Puzzle
 
             ///////////////////////////////////////////////////////////////////////////////////////PREPARE VARIABLES END
 
-            
+
 
             //////APPLICATION LOOP START
             while (application)
@@ -169,7 +283,7 @@ namespace Word_Puzzle
                 bool gameFinished = false;
 
 
-                
+
 
 
                 /////START SCREEN START
@@ -194,20 +308,20 @@ namespace Word_Puzzle
                 Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("3 - If you want to exit please press 3."); Console.ResetColor(); Console.WriteLine("                                           |                |");
                 Console.WriteLine("|               |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
                 Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
-                
-                
+
+
                 //if 
                 menu_in = Convert.ToInt16(Console.ReadLine());
-                
+
                 //////START SCREEN END
 
 
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
                 //////TUTORIAL START
 
                 if (menu_in == 2)
@@ -227,7 +341,7 @@ namespace Word_Puzzle
                     Console.WriteLine("|---------------------------------------------------------------------------------------------------------------------|");
                     //other alternative word for compatible -congruent- 
 
-                    
+
 
 
 
@@ -239,11 +353,11 @@ namespace Word_Puzzle
                 /////TUTORIAL END
 
 
-                
-                
-                
-                
-                
+
+
+
+
+
                 ///////GAME LOOP START
                 if (menu_in == 1)
                 {
@@ -261,89 +375,22 @@ namespace Word_Puzzle
                     while (!gameFinished)
                     {
                         bool boxFound = false;
-
+                        int whichBox = -1;
+                        int whichWord = -1;
 
 
                         ////////////////////////////////////////////////////////////////////////////////////////PRINT GAME SCREEN START
-                        
-
-                        //to write word counter
-                        Console.Clear();
-                        Console.WriteLine("WORD = " + wordCounter);
-                        
 
 
-                        //to write emty screen
-                        Console.WriteLine(" 012345678901234      +-WORD-LIST--------------+");
-                        Console.WriteLine("0                     |                        |");
-                        Console.WriteLine("1                     |                        |");
-                        Console.WriteLine("2                     |                        |");
-                        Console.WriteLine("3                     |                        |");
-                        Console.WriteLine("4                     |                        |");
-                        Console.WriteLine("5                     |                        |");
-                        Console.WriteLine("6                     |                        |");
-                        Console.WriteLine("7                     |                        |");
-                        Console.WriteLine("8                     |                        |");
-                        Console.WriteLine("9                     |                        |");
-                        Console.WriteLine("0                     |                        |");
-                        Console.WriteLine("1                     |                        |");
-                        Console.WriteLine("2                     |                        |");
-                        Console.WriteLine("3                     |                        |");
-                        Console.WriteLine("4                     +------------------------+");
+                        PrintPuzzle(wordCounter, puzzleText, words);
 
-
-                        //messages
-                        Console.SetCursorPosition(0, puzzleText.GetLength(0) + 2);
-                        if (wordCounter == 0)
-                        {
-                            Console.WriteLine("Press \"ENTER\" to start.");
-                        }
-                        else
-                        {
-                            //write the message when word counter is not 0
-                        }
                         wordCounter++;
 
-
-
-                        //to write words
-                        for (int i = 0; i < words.GetLength(0); i++)
-                        {
-                            int xList = 0, yList = 0;
-                            
-
-                            if (i < puzzleText.GetLength(0) - 1)
-                            {
-                                xList = 9 + puzzleText[0].Length;
-                            }
-                            else
-                            {
-                                xList = 20 + puzzleText[0].Length;
-                            }
-
-                            yList = (i % (puzzleText[0].Length - 1)) + 2;
-
-                            Console.SetCursorPosition(xList,yList);
-                            Console.Write("[ ]" + words[i]);
-                        }
-
-
-                        //to print puzzle
-                        for (int i = 0; i < puzzleText.GetLength(0); i++)
-                        {
-                            Console.SetCursorPosition(1,2+i);
-                            Console.Write(puzzleText[i]);
-                        }
-
-
-
-
-                        Console.Read();
                         //////////////////////////////////////////////////////////////////////////////////////////PRINT GAME SCREEN END
 
 
 
-                        
+
 
 
                         ////////////////////////////////////SCAN BOXES START
@@ -352,9 +399,51 @@ namespace Word_Puzzle
                         //specify loop START
                         while (!boxFound)
                         {
+                            for (int i = 0; i < box.GetLength(0); i++)
+                            {
+                                int matchCounter = 0;
 
+                                if (!boxCompleted[i] && specExist[i])
+                                {
+
+                                    for (int j = 0; j < words.GetLength(0); j++)
+                                    {
+                                        if (words[j].Length == box[i].Length)
+                                        {
+                                            //MATCH CONTROL START
+                                            bool matched = true;
+
+                                            for (int k = 0; k < words[j].Length; k++)
+                                            {
+                                                if (box[i][k] != ' ' && box[i][k] != words[j][k])
+                                                {
+                                                    matched = false;
+                                                }
+                                            }
+                                            if (matched)
+                                            {
+                                                matchCounter++;
+                                                whichWord = j;
+                                            }
+                                        }
+                                    }
+                                    if (matchCounter == 1)
+                                    {
+                                        boxFound = true;
+                                        whichBox = i;
+                                        break;
+                                    }
+                                }
+                            }
                         }
+                        
+                        
                         //specify loop end
+                        Console.SetCursorPosition(25, 0);
+                        Console.WriteLine(whichWord + " " + whichBox + " " + boxFound);
+                        Console.Read();
+
+
 
 
                         //box anaysis loop start
@@ -386,8 +475,8 @@ namespace Word_Puzzle
 
 
 
-                        
-                    
+
+
                         ///////CONTROL PUZZLE FISINHED START
 
                         ///////CONTROL PUZZLE FINISHED END
@@ -399,26 +488,26 @@ namespace Word_Puzzle
 
                     }
                     ///////TURN LOOP END
-                    
+
                 }
                 ////////GAME LOOP END
 
 
-                
-            
-            
-            
+
+
+
+
                 //////CREATE SOLUTION ARRAY START
 
                 //TO TEXT
 
                 ////////CREATE SOLUTION ARRAY END
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
                 //////END SCREEN START
 
                 //////END SCREEN END
