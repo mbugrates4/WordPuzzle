@@ -167,6 +167,7 @@ namespace Word_Puzzle
             string[] box = new string[words.GetLength(0)];
             bool[] specExist = new bool[words.GetLength(0)];
             bool[] boxCompleted = new bool[words.GetLength(0)];
+            bool[] wordUsed = new bool[words.GetLength(0)];
             ///////////////////////////////////////////////////////////////////////////////////////VARIABLES END
 
 
@@ -187,7 +188,18 @@ namespace Word_Puzzle
             }
 
 
+            //to empty wordUsed
+            for (int i = 0; i < words.GetLength(0); i++)
+            {
+                wordUsed[i] = false;
+            }
 
+
+            //to make false all of boxCompleted variables
+            for (int i = 0; i < boxCompleted.GetLength(0); i++)
+            {
+                boxCompleted[i] = false;
+            }
 
 
 
@@ -260,11 +272,7 @@ namespace Word_Puzzle
                 }
             }
 
-            //to make false all of boxCompleted variables
-            for (int i = 0; i < boxCompleted.GetLength(0); i++)
-            {
-                boxCompleted[i] = false;
-            }
+            
 
 
 
@@ -478,7 +486,17 @@ namespace Word_Puzzle
 
 
                         ///////CONTROL PUZZLE FISINHED START
-
+                        gameFinished = true;
+                        for (int i = 0; i < puzzleText.GetLength(0); i++)
+                        {
+                            for (int j = 0; j < puzzleText[0].Length; j++)
+                            {
+                                if (puzzleText[i][j] == ' ')
+                                {
+                                    gameFinished = false;
+                                }
+                            }
+                        }
                         ///////CONTROL PUZZLE FINISHED END
 
 
