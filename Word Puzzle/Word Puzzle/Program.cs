@@ -143,7 +143,7 @@ namespace Word_Puzzle
             for (int i = 0; i < box.GetLength(0); i++)//to scan all words
             {
                 specExist[i] = false;
-                for (int j = 0; j < box.Length; j++)// to scan all characters
+                for (int j = 0; j < box[i].Length; j++)// to scan all characters
                 {
                     if (box[i][j] != ' ')
                     {
