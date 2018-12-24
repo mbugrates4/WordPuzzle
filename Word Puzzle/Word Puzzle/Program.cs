@@ -9,6 +9,8 @@ namespace Word_Puzzle
 {
     class Program
     {
+
+        //Sorting Prosedure
         public static IList<string> SortStringLength(IList<string> stringList)
         {
             string[] wordDict = stringList.ToArray<string>();
@@ -52,6 +54,11 @@ namespace Word_Puzzle
             ///////////////////////////////////////////////////////////////////////////////////////VARIABLES START
             bool application = true; ;
             int menu_in = 0;
+            bool[] vertical = new bool[words.GetLength(0)];
+            int[] boxCoorX = new int[words.GetLength(0)];
+            int[] boxCoorY = new int[words.GetLength(0)];
+            string[] box = new string[words.GetLength(0)];
+            bool[] specExist = new bool[words.GetLength(0)];
             ///////////////////////////////////////////////////////////////////////////////////////VARIABLES END
 
 
@@ -64,10 +71,94 @@ namespace Word_Puzzle
 
             ///////////////////////////////////////////////////////////////////////////////////////PREPARE VARIABLES START
             words = (string[])SortStringLength(words);
-            foreach (string s in words)
+
+            //to make empty variables
+            for (int i = 0; i < words.GetLength(0); i++)
             {
-                Console.WriteLine(s);
+                box[i] = "";
             }
+
+            
+            
+            
+            
+            
+            ////////////TO GET BOXES STRING
+            int counterBox = 0;
+
+            //control all of points
+            for (int i = 1; i < puzzleText.GetLength(0) - 1; i++)
+            {
+                for (int j = 1; j < puzzleText[0].Length - 1; j++)
+                {
+                    if (puzzleText[i][j] != '█')
+                    {
+                        //if left of point is wall and the right of point is not wall this point is a start point of a box which horizontal
+                        if (puzzleText[i][j - 1] == '█' && puzzleText[i][j + 1] != '█')
+                        {
+                            //define reqıuired variables
+                            vertical[counterBox] = false;
+                            boxCoorY[counterBox] = i;
+                            boxCoorX[counterBox] = j;
+
+                            //to add points at the right of start point
+                            int count = 0;
+                            while (puzzleText[i][j + count] != '█')
+                            {
+                                box[counterBox] += puzzleText[i][j + count];
+                                count++;
+                            }
+
+                            counterBox++;//to next box
+
+                        }
+
+                        //if top of the point is wall and under the point is not wall this point is a start point of a box which vertical
+                        if (puzzleText[i - 1][j] == '█' && puzzleText[i + 1][j] != '█')
+                        {
+                            //define reqıuired variables
+                            vertical[counterBox] = true;
+                            boxCoorY[counterBox] = i;
+                            boxCoorX[counterBox] = j;
+
+                            //to add points at the right of start point
+                            int count = 0;
+                            while (puzzleText[i + count][j] != '█')
+                            {
+                                box[counterBox] += puzzleText[i + count][j];
+                                count++;
+                            }
+
+                            counterBox++;//to next box
+
+                        }
+                    }
+
+                }
+            }
+
+
+
+            //to get spec exist bool variable
+            for (int i = 0; i < box.GetLength(0); i++)//to scan all words
+            {
+                specExist[i] = false;
+                for (int j = 0; j < box.Length; j++)// to scan all characters
+                {
+                    if (box[i][j] != ' ')
+                    {
+                        specExist[i] = true;
+                    }
+                }
+            }
+            
+            
+            
+
+
+
+
+
             ///////////////////////////////////////////////////////////////////////////////////////PREPARE VARIABLES END
 
             
@@ -136,6 +227,12 @@ namespace Word_Puzzle
                     Console.WriteLine("|---------------------------------------------------------------------------------------------------------------------|");
                     //other alternative word for compatible -congruent- 
 
+                    
+
+
+
+
+
                     Console.ReadLine();
                 }
 
@@ -168,7 +265,7 @@ namespace Word_Puzzle
 
 
                         ////////////////////////////////////////////////////////////////////////////////////////PRINT GAME SCREEN START
-
+                        
 
                         //to write word counter
                         Console.Clear();
@@ -242,11 +339,11 @@ namespace Word_Puzzle
 
 
                         Console.Read();
-                        //////////////////////////////////////////////////////////////////////////////////////////PRINT GAME SCREEN START
+                        //////////////////////////////////////////////////////////////////////////////////////////PRINT GAME SCREEN END
 
 
 
-
+                        
 
 
                         ////////////////////////////////////SCAN BOXES START
