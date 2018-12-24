@@ -25,11 +25,10 @@ namespace Word_Puzzle
             }));
             return wordDict;
         }
+        
 
-        public static string[] puzzleText;
 
-
-        static void PrintPuzzle(int wordCounterPrec, string[] puzzleTextPrec, string[] wordsPrec)
+        static void PrintPuzzle(int wordCounterPrec, string[] puzzleTextPrec, string[] wordsPrec, bool[] wordUsedPrec)
         {
             //to write word counter
             Console.Clear();
@@ -123,7 +122,17 @@ namespace Word_Puzzle
                     {
                         yList = (i % (puzzleTextPrec.Length - 1)) + 2;
                         Console.SetCursorPosition(xList, yList);
-                        Console.Write("[ ]" + wordsPrec[i]);
+                        Console.Write("[");
+                        if (wordUsedPrec[i] == true)
+                        {
+                            Console.Write("+");
+                        }
+                        else
+                        {
+                            Console.Write(" ");
+                        }
+                        
+                        Console.Write("]" + wordsPrec[i]);
                     }
                     else
                     {
@@ -133,6 +142,89 @@ namespace Word_Puzzle
                 }
             }
         }
+
+        //game finished control function
+        static bool GameFinishedControl(string[] puzzle)
+        {
+            bool gameFinished = true;
+            for (int i = 0; i < puzzle.GetLength(0); i++)
+            {
+                for (int j = 0; j < puzzle[0].Length; j++)
+                {
+                    if (puzzle[i][j] == ' ')
+                    {
+                        gameFinished = false;
+                    }
+                }
+            }
+            return gameFinished;
+        }
+
+        static void PrintTutorial()
+        {
+            Console.Clear();
+
+            Console.WriteLine("| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |");
+            Console.Write("|  |                                                "); Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("Tutorial"); Console.ResetColor(); Console.WriteLine("                                                       |  |");
+            Console.WriteLine("|  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|  |");
+            Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Program needs compatible puzzle matrix and a word list which we describe as dictionary both in .txt files."); Console.ResetColor(); Console.WriteLine("  |  |");
+            Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Program will draw a puzzle with given matrix and solve your puzzle step by step while filling blanks with "); Console.ResetColor(); Console.WriteLine("  |  |");
+            Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("  words in the dictionary.                                                                                  "); Console.ResetColor(); Console.WriteLine("  |  |");
+            Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("                                                                                                            "); Console.ResetColor(); Console.WriteLine("  |  |");
+            Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Your solution will be given to you both in the end of program and as .txt file in the program folder.     "); Console.ResetColor(); Console.WriteLine("  |  |");
+            Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Please enter and wait.                                                                                    "); Console.ResetColor(); Console.WriteLine("  |  |");
+            Console.WriteLine("|  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|  |");
+            Console.WriteLine("|---------------------------------------------------------------------------------------------------------------------|");
+            //other alternative word for compatible -congruent- 
+            Console.ReadLine();
+        }
+
+        //Print Menu Procedure
+        static void PrintMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
+            Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("__          __  ______   _        _____    ____    __  __   ______                           "); Console.ResetColor(); Console.WriteLine(" |");
+            Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\        / / |  ____| | |      / ____|  / __ \\  |  \\/  | |  ____|                          "); Console.ResetColor(); Console.WriteLine(" | ");
+            Console.Write("|                       "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\  /\\  / /  | |__ |  | |     | |      | |  | | | \\  / | | |__                             "); Console.ResetColor(); Console.WriteLine(" | ");
+            Console.Write("|                        "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\//  \\/ /  |  __|   | |     | |      | |  | | | |\\/| | |  __|                            "); Console.ResetColor(); Console.WriteLine(" | ");
+            Console.Write("|                         "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\  /\\  /    | |____  | |____ | |____  | |__| | | |  | | | |____                           "); Console.ResetColor(); Console.WriteLine(" | ");
+            Console.Write("|                          "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\//  \\//   |______| |______| \\_____|  \\____/  |_|  |_| |______|                          "); Console.ResetColor(); Console.WriteLine(" | ");
+            Console.WriteLine("|                                                                                                                    | ");
+
+
+            //Console.WriteLine("|  Please upload your puzzle and words as two seperate .txt file and open program again.If you uploaded files ignore this message and continue.|");
+            Console.WriteLine("| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|");
+            Console.Write("|               |                                   "); Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("Menu"); Console.ResetColor(); Console.WriteLine("                                            |                |");
+            Console.WriteLine("|               |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
+            Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("1 - If you want to continue and see your solutions please press 1."); Console.ResetColor(); Console.WriteLine("                |                |");
+            Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("2 - If you want to see tutorials and informations about program please press 2."); Console.ResetColor(); Console.WriteLine("   |                |");
+            Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("3 - If you want to exit please press 3."); Console.ResetColor(); Console.WriteLine("                                           |                |");
+            Console.WriteLine("|               |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
+            Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
+        }
+
+        static string ChangeChar(string str, int j, char chr)
+        {
+            string preString = str.Substring(0, j);
+            string postString = str.Substring(j + 1, str.Length - j - 1);
+            str = preString + chr + postString;
+            return str;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -182,7 +274,7 @@ namespace Word_Puzzle
             words = (string[])SortStringLength(words);
 
             //to make empty variables
-            for (int i = 0; i < words.GetLength(0); i++)
+            for (int i = 0; i < box.GetLength(0); i++)
             {
                 box[i] = "";
             }
@@ -205,9 +297,7 @@ namespace Word_Puzzle
 
             ////////////TO GET BOXES STRING
             int counterBox = 0;
-
-            //control all of points
-            for (int i = 1; i < puzzleText.GetLength(0) - 1; i++)
+            for (int i = 1; i < puzzleText.GetLength(0) - 1; i++)//control all of points
             {
                 for (int j = 1; j < puzzleText[0].Length - 1; j++)
                 {
@@ -228,9 +318,7 @@ namespace Word_Puzzle
                                 box[counterBox] += puzzleText[i][j + count];
                                 count++;
                             }
-
                             counterBox++;//to next box
-
                         }
 
                         //if top of the point is wall and under the point is not wall this point is a start point of a box which vertical
@@ -248,9 +336,7 @@ namespace Word_Puzzle
                                 box[counterBox] += puzzleText[i + count][j];
                                 count++;
                             }
-
                             counterBox++;//to next box
-
                         }
                     }
 
@@ -271,16 +357,6 @@ namespace Word_Puzzle
                     }
                 }
             }
-
-            
-
-
-
-
-
-
-
-
             ///////////////////////////////////////////////////////////////////////////////////////PREPARE VARIABLES END
 
 
@@ -289,76 +365,19 @@ namespace Word_Puzzle
             while (application)
             {
                 bool gameFinished = false;
+                
 
 
-
-
-
-                /////START SCREEN START
-                ///
-                Console.Clear();
-                Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
-                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("__          __  ______   _        _____    ____    __  __   ______                           "); Console.ResetColor(); Console.WriteLine(" |");
-                Console.Write("|                      "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\        / / |  ____| | |      / ____|  / __ \\  |  \\/  | |  ____|                          "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                       "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\  /\\  / /  | |__ |  | |     | |      | |  | | | \\  / | | |__                             "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                        "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\ \\//  \\/ /  |  __|   | |     | |      | |  | | | |\\/| | |  __|                            "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                         "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\  /\\  /    | |____  | |____ | |____  | |__| | | |  | | | |____                           "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.Write("|                          "); Console.ForegroundColor = ConsoleColor.DarkCyan; Console.Write("\\//  \\//   |______| |______| \\_____|  \\____/  |_|  |_| |______|                          "); Console.ResetColor(); Console.WriteLine(" | ");
-                Console.WriteLine("|                                                                                                                    | ");
-
-
-                //Console.WriteLine("|  Please upload your puzzle and words as two seperate .txt file and open program again.If you uploaded files ignore this message and continue.|");
-                Console.WriteLine("| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|");
-                Console.Write("|               |                                   "); Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("Menu"); Console.ResetColor(); Console.WriteLine("                                            |                |");
-                Console.WriteLine("|               |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
-                Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("1 - If you want to continue and see your solutions please press 1."); Console.ResetColor(); Console.WriteLine("                |                |");
-                Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("2 - If you want to see tutorials and informations about program please press 2."); Console.ResetColor(); Console.WriteLine("   |                |");
-                Console.Write("|               | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("3 - If you want to exit please press 3."); Console.ResetColor(); Console.WriteLine("                                           |                |");
-                Console.WriteLine("|               |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|                |");
-                Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
-
-
-                //if 
+                //START SCREEN
+                PrintMenu();
+                //get input from user
                 menu_in = Convert.ToInt16(Console.ReadLine());
-
-                //////START SCREEN END
-
+                
 
 
-
-
-
-
-
-                //////TUTORIAL START
-
+                //TUTORIAL
                 if (menu_in == 2)
-                {
-                    Console.Clear();
-
-                    Console.WriteLine("| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |");
-                    Console.Write("|  |                                                "); Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("Tutorial"); Console.ResetColor(); Console.WriteLine("                                                       |  |");
-                    Console.WriteLine("|  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|  |");
-                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Program needs compatible puzzle matrix and a word list which we describe as dictionary both in .txt files."); Console.ResetColor(); Console.WriteLine("  |  |");
-                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Program will draw a puzzle with given matrix and solve your puzzle step by step while filling blanks with "); Console.ResetColor(); Console.WriteLine("  |  |");
-                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("  words in the dictionary.                                                                                  "); Console.ResetColor(); Console.WriteLine("  |  |");
-                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("                                                                                                            "); Console.ResetColor(); Console.WriteLine("  |  |");
-                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Your solution will be given to you both in the end of program and as .txt file in the program folder.     "); Console.ResetColor(); Console.WriteLine("  |  |");
-                    Console.Write("|  | "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("- Please enter and wait.                                                                                    "); Console.ResetColor(); Console.WriteLine("  |  |");
-                    Console.WriteLine("|  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|  |");
-                    Console.WriteLine("|---------------------------------------------------------------------------------------------------------------------|");
-                    //other alternative word for compatible -congruent- 
-
-
-
-
-
-
-
-                    Console.ReadLine();
-                }
-
-                /////TUTORIAL END
+                    PrintTutorial();
 
 
 
@@ -369,16 +388,11 @@ namespace Word_Puzzle
                 ///////GAME LOOP START
                 if (menu_in == 1)
                 {
+
+
                     int wordCounter = 0;
-
-
-
-
-
-
-
-
-
+                    
+                    
                     //////TURN LOOP START
                     while (!gameFinished)
                     {
@@ -386,26 +400,86 @@ namespace Word_Puzzle
                         int whichBox = -1;
                         int whichWord = -1;
 
+                        
+                        
+                        
+                        //PRINT GAME SCREEN
+                        PrintPuzzle(wordCounter++, puzzleText, words, wordUsed);
 
-                        ////////////////////////////////////////////////////////////////////////////////////////PRINT GAME SCREEN START
 
 
-                        PrintPuzzle(wordCounter, puzzleText, words);
 
-                        wordCounter++;
 
-                        //////////////////////////////////////////////////////////////////////////////////////////PRINT GAME SCREEN END
+                        //to make empty variables
+                        for (int i = 0; i < box.GetLength(0); i++)
+                        {
+                            box[i] = "";
+                        }
 
+
+                        ////////////TO GET BOXES STRING
+                        counterBox = 0;
+                        for (int i = 1; i < puzzleText.GetLength(0) - 1; i++)//control all of points
+                        {
+                            for (int j = 1; j < puzzleText[0].Length - 1; j++)
+                            {
+                                if (puzzleText[i][j] != '█')
+                                {
+                                    //if left of point is wall and the right of point is not wall this point is a start point of a box which horizontal
+                                    if (puzzleText[i][j - 1] == '█' && puzzleText[i][j + 1] != '█')
+                                    {
+                                        //to add points at the right of start point
+                                        int count = 0;
+                                        while (puzzleText[i][j + count] != '█')
+                                        {
+                                            box[counterBox] += puzzleText[i][j + count];
+                                            count++;
+                                        }
+                                        counterBox++;//to next box
+                                    }
+
+                                    //if top of the point is wall and under the point is not wall this point is a start point of a box which vertical
+                                    if (puzzleText[i - 1][j] == '█' && puzzleText[i + 1][j] != '█')
+                                    {
+                                        //to add points at the right of start point
+                                        int count = 0;
+                                        while (puzzleText[i + count][j] != '█')
+                                        {
+                                            box[counterBox] += puzzleText[i + count][j];
+                                            count++;
+                                        }
+                                        counterBox++;//to next box
+                                    }
+                                }
+                            }
+                        }
+                        ////////////////TO GET BOXES END
+
+
+
+
+
+
+                        //to get spec exist bool variable
+                        for (int i = 0; i < box.GetLength(0); i++)//to scan all words
+                        {
+                            specExist[i] = false;
+                            for (int j = 0; j < box[i].Length; j++)// to scan all characters
+                            {
+                                if (box[i][j] != ' ')
+                                {
+                                    specExist[i] = true;
+                                }
+                            }
+                        }
 
 
 
 
 
                         ////////////////////////////////////SCAN BOXES START
-
-
                         //specify loop START
-                        while (!boxFound)
+                        if (!boxFound)
                         {
                             for (int i = 0; i < box.GetLength(0); i++)
                             {
@@ -416,7 +490,7 @@ namespace Word_Puzzle
 
                                     for (int j = 0; j < words.GetLength(0); j++)
                                     {
-                                        if (words[j].Length == box[i].Length)
+                                        if (words[j].Length == box[i].Length && wordUsed[j] == false)
                                         {
                                             //MATCH CONTROL START
                                             bool matched = true;
@@ -444,18 +518,12 @@ namespace Word_Puzzle
                                 }
                             }
                         }
-                        
-                        
                         //specify loop end
-                        Console.SetCursorPosition(25, 0);
-                        Console.WriteLine(whichWord + " " + whichBox + " " + boxFound);
-                        Console.Read();
 
-
-
+                        
 
                         //box anaysis loop start
-                        while (!boxFound)
+                        if (!boxFound)
                         {
 
                         }
@@ -463,47 +531,67 @@ namespace Word_Puzzle
 
 
                         //step by step loop start
-                        while (!boxFound)
+                        if (!boxFound)
                         {
 
                         }
                         //step by step loop end
-
                         ///////////////////////////////////SCAN BOXES END
 
 
+                        ////test codes
+                        //Console.SetCursorPosition(25, 0);
+                        //Console.WriteLine(whichWord + " " + whichBox + " " + boxFound);
+                        //Console.Read();
 
 
 
 
 
-                        ///////FIT WORD START
 
-                        ///////FIT WORD END
-
-
-
-
-
-                        ///////CONTROL PUZZLE FISINHED START
-                        gameFinished = true;
-                        for (int i = 0; i < puzzleText.GetLength(0); i++)
+                        ///////////////////////////////////////////////////////////////////////////////FIT WORD START
+                        if (boxFound)
                         {
-                            for (int j = 0; j < puzzleText[0].Length; j++)
+                            box[whichBox] = words[whichBox];
+                            wordUsed[whichWord] = true;
+                            boxCompleted[whichBox] = true;
+
+                            //if box is horizontal
+                            if (vertical[whichBox] == false)
                             {
-                                if (puzzleText[i][j] == ' ')
+                                for (int i = 0; i < words[whichWord].Length; i++)
                                 {
-                                    gameFinished = false;
+                                    puzzleText[boxCoorY[whichBox]] = ChangeChar(puzzleText[boxCoorY[whichBox]], boxCoorX[whichBox] + i, words[whichWord][i]);
+                                }
+                            }
+
+                            //if box is vertical
+                            if (vertical[whichBox] == true)
+                            {
+                                for (int i = 0; i < words[whichWord].Length; i++)
+                                {
+                                    puzzleText[boxCoorY[whichBox] + i] = ChangeChar(puzzleText[boxCoorY[whichBox] + i], boxCoorX[whichBox], words[whichWord][i]);
                                 }
                             }
                         }
-                        ///////CONTROL PUZZLE FINISHED END
+                        Console.ReadLine();
+                        //////////////////////////////////////////////////////////////////////////////////FIT WORD END
+
+
+                        
+                        //CONTROL PUZZLE FISINHED START
+                        gameFinished = GameFinishedControl(puzzleText);
 
 
 
+                        //LAST PRINT OF SCREEN
+                        if (gameFinished)
+                        {
+                            PrintPuzzle(wordCounter++, puzzleText, words, wordUsed);
+                            Console.ReadLine();
+                        }
 
-
-
+                        
                     }
                     ///////TURN LOOP END
 
